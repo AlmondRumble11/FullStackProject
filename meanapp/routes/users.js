@@ -58,7 +58,7 @@ router.post("/authenticate", (req, res, next) => {
                 const token = jwt.sign({ data: user }, config.secret, {
                     expiresIn: 604800 // 1 weeks time
                 });
-                console.log(config.secret);
+                console.log(user);
                 console.log("sending info");
                 res.json({
                     success: true,
@@ -71,6 +71,7 @@ router.post("/authenticate", (req, res, next) => {
 
                     }
                 });
+                console.log(token);
                 //no mathc
             } else {
                 return res.json({ success: false, msg: "Wrong password" });

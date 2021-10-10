@@ -6,12 +6,13 @@ const config = require('../config/database');
 
 module.exports = function(passport) {
     let opts = {};
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('JWT');
     opts.secretOrKey = config.secret;
     console.log("config secret=" + config.secret);
     //console.log(passport);
+    console.log("passport use");
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-        console.log(jwt_payload);
+        console.log(jwt_payload.data._id);
         User.getUserById(jwt_payload.data._id, (err, user) => {
             if (err) {
                 return done(err, false);
