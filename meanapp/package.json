@@ -1,0 +1,33 @@
+{
+    "name": "meanapp",
+    "version": "1.0.0",
+    "description": "Mean stack authentication app based on tutorial by travesty media",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app"
+    },
+    "dependencies": {
+        "bcryptjs": "*",
+        "body-parser": "*",
+        "cookie-parser": "^1.4.5",
+        "cors": "*",
+        "express": "*",
+        "express-session": "^1.17.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "*",
+        "passport": "^0.3.2",
+        "passport-jwt": "^2.2.1",
+        "passport-local": "^1.0.0",
+        "session": "^0.1.0"
+    },
+    "author": "Jesse Mustonen",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.2",
+        "@types/cors": "^2.8.12",
+        "@types/jsonwebtoken": "^8.5.5",
+        "@types/passport": "^1.0.7",
+        "@types/passport-jwt": "^3.0.6"
+    }
+}
