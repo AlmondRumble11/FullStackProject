@@ -8,6 +8,7 @@ const path = require("path");
 const config = require("./config/database");
 
 //connec to db
+
 mongoose.connect(config.database);
 
 //on coonncetion 
@@ -25,7 +26,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 //add port 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 
 
@@ -46,7 +47,7 @@ app.use(express.json());
 
 
 //passport middleware
-//
+//https://github.com/jaredhanson/passport/issues/244
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -71,6 +72,9 @@ app.get('/', (req, res, next) => {
     res.send("PLACE HOLDER HOMEPAGE");
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 //listen to port and start the server
 app.listen(port, () => {
     console.log("server is running on the port: " + port);
