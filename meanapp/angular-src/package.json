@@ -12,6 +12,7 @@
     },
     "private": true,
     "dependencies": {
+        "@angular/cli": "^12.2.12",
         "@angular/common": "^2.3.1",
         "@angular/compiler": "^2.3.1",
         "@angular/core": "^2.3.1",
