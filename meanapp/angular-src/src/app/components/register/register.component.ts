@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   onRegisterSubmit(){
+    console.log("registering a new user");
     //create user
     const user={
       name: this.name,

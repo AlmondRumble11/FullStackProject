@@ -1,2 +1,18 @@
-<h2 class="page-header">Dashboard</h2>
-<p>This page shows all of the blogs</p>
+<h2 class="page-header">All public posts</h2>
+
+
+<form class="form-signin" (reset)="onMorePostPressed()">
+<div *ngIf="posts">
+    
+    <li *ngFor="let post of posts" (click)="onSelect(post)" style="list-style: none;" >
+        <span >Title: {{post.title}}</span>
+        <br> 
+        <span >Written By:{{post.username}}</span>
+    </li>
+       
+    
+    <div class="wrapper">
+        <button id="morePosts"  type="reset" class="btn btn-primary  waves-effect">Show more posts</button>
+    </div>
+</div>
+</form>

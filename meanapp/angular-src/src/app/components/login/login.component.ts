@@ -18,13 +18,13 @@ export class LoginComponent implements OnInit {
   }
   //login submit
   onLoginSubmit(){
-    console.log("something");
+    
     const user = {
       username: this.username,
       password: this.password
     }
 
-    console.log("something");
+   
     this.authService.authenticateUser(user).subscribe(data=>{
       //if correct username and password
       if(data.success){

@@ -1,0 +1,24 @@
+test
+
+
+<div *ngIf="currentPost">
+  <h2>
+   
+    {{currentPost.title}}
+  </h2>
+  <small>Written by: {{currentPost.username}}</small>
+
+  <div class="form-group">
+    <label for="content">Content</label>
+ 
+   
+      <textarea [disabled]="true" style="resize: none;" name="content" class="form-control" id="content" cols="50" rows="10">{{currentPost.content}}</textarea>
+    </div>
+    <label style="visibility: hidden;" for="private"><input type="checkbox" [(ngModel)]="private" aria-describedby="privateText" name="private" id="private" value="false"><span>Private</span></label>
+    <small style="visibility: hidden;" id="privateText" class="form-text text-muted">Check this is you want your post to be private so only you can see it</small>
+    <button id="edit-btn"  class="btn btn-primary" style="visibility: hidden;" (click)="onEditPressed()">Edit</button>
+    <button id="remove-btn" class="btn btn-primary" style="visibility: hidden;">Remove</button>
+
+   
+ 
+</div>

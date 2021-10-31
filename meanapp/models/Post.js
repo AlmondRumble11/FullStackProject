@@ -6,18 +6,17 @@ const postShema = mongoose.Schema({
     userID: {
         type: String
     },
+    username:{
+        type:String
+    },
     title: {
         type: String,
         required: true
     },
-    text: {
+    content: {
         type: String,
         required: true
     },
-    images: {
-        type: Array
-    },
-
     private: {
         type: Boolean
     }

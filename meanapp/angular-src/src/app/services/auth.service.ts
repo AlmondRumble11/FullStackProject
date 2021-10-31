@@ -9,11 +9,18 @@ import {tokenNotExpired} from 'angular2-jwt';
 export class AuthService {
   authToken : any;
   user: any;
+  post: any;
 
 
   constructor(private http:Http) { }
 
-
+  addPost(postcontent){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    console.log("adding post to db");
+    
+    return this.http.post('http://localhost:8080/users/addpost',postcontent,{headers:headers}).map(res=>res.json());
+  }
 
   //register the user
   registerUser(user){
@@ -38,11 +45,19 @@ export class AuthService {
     this.authToken= token;
     this.user = user;
   }
+  storeCurrentPost(post){
+    localStorage.setItem('post', post._id);
+    this.post = post;
+    console.log(post);
+    
+
+  }
 
   //logout
   logout(){
     this.authToken = null;
     this.user = null;
+    this.post = null;
     localStorage.clear();
   }
   
@@ -50,6 +65,11 @@ export class AuthService {
   loadToken(){
     const token  = localStorage.getItem('id_token');
     this.authToken = token;
+  }
+  loadPost(){
+    const post = localStorage.getItem('post');
+    this.post = post;
+    console.log("load post id:"+this.post);
   }
 
 
@@ -65,7 +85,20 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  getPost(){
+    let headers = new Headers();
+    this.loadToken();
+    this.loadPost();
 
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json'); 
+    let id = this.post
+    let url = 'http://localhost:8080/users/post/'+id;
+    //console.log(url);
+    return this.http.get(url, {headers: headers})
+      .map(res => res.json());
+  
+  }
 
   getPosts(){
     let headers = new Headers();
