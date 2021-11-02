@@ -1,0 +1,24 @@
+li {
+    cursor: pointer;
+    left: 0;
+    background-color: rgb(243, 170, 141);
+    margin: .5em;
+    padding: .3em 0;
+    height: 3.5em;
+    border-radius: 4px;
+}
+
+li:hover {
+    color: #22221e;
+    background-color: #dbcdcd;
+    left: .1em;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}

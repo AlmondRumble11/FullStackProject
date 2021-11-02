@@ -23,7 +23,7 @@ export class AddpostComponent implements OnInit {
   }
 
   onPostSubmit(){
-
+    
     //get the current user
     this.authService.getProfile().subscribe(data =>{
       this.user = data.user;
@@ -33,6 +33,8 @@ export class AddpostComponent implements OnInit {
 
       console.log(this.username);
         //create a new post
+
+    console.log("adding a new post");
     if(this.private == undefined) this.private = false;
     console.log(this.private);
     if(!this.title){
@@ -61,8 +63,17 @@ export class AddpostComponent implements OnInit {
     this.authService.addPost(post).subscribe(data=>{
       //console.log(data);
       if(data.success){
-        this.flashMessage.show("A new post added",{cssClass: 'alert-success',timeout:3000});
-        this.router.navigate(['/dashboard']);
+
+        //add post to user's posts
+        this.authService.updateUserPost(this.userID, this.title).subscribe(data=>{
+          if(data.success){
+            this.flashMessage.show("A new post added",{cssClass: 'alert-success',timeout:3000});
+            this.router.navigate(['/dashboard']);
+          }else{
+            this.flashMessage.show("Something went wrong. Please try again",{cssClass: 'alert-danger',timeout:3000});
+            this.router.navigate(['/addpost']);
+          }
+        });
       }else{
         this.flashMessage.show("Something went wrong. Please try again",{cssClass: 'alert-danger',timeout:3000});
         this.router.navigate(['/addpost']);

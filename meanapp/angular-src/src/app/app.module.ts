@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddpostComponent } from './components/addpost/addpost.component';
+import { UserpostsComponent } from './components/userposts/userposts.component';
 import { PostComponent } from './components/post/post.component';
 import { ValidateService } from './services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
   {path:'profile', component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'addpost', component:AddpostComponent,canActivate:[AuthGuard]},
+ {path:'userposts', component:UserpostsComponent,canActivate:[AuthGuard]},
 
 ];
 
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     DashboardComponent,
     AddpostComponent, 
-    PostComponent
+    PostComponent,
+  UserpostsComponent
   ],
   imports: [
     BrowserModule,

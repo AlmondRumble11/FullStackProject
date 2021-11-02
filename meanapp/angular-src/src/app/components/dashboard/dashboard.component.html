@@ -1,18 +1,25 @@
 <h2 class="page-header">All public posts</h2>
 
+<!--https://stackoverflow.com/questions/34656432/add-input-ng-model-search-to-group-filtering-->
+<div class="form-group">
+    <label for="search-text">Search for posts</label>
+    <input type="email" class="form-control" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText" placeholder="Enter text to search" autofocus>
+    <button id="seach-btn" class="btn btn-primary  waves-effect" (click)="onSearchPressed()">Search</button>
+</div>
+
 
 <form class="form-signin" (reset)="onMorePostPressed()">
-<div *ngIf="posts">
-    
-    <li *ngFor="let post of posts" (click)="onSelect(post)" style="list-style: none;" >
-        <span >Title: {{post.title}}</span>
-        <br> 
-        <span >Written By:{{post.username}}</span>
-    </li>
-       
-    
-    <div class="wrapper">
-        <button id="morePosts"  type="reset" class="btn btn-primary  waves-effect">Show more posts</button>
+    <div *ngIf="posts">
+        <p>There are {{postCount}} posts</p>
+        <li *ngFor="let post of posts" (click)="onSelect(post)" style="list-style: none;">
+            <span>Title: {{post.title}}</span>
+            <br>
+            <span>Written By:{{post.username}}</span>
+        </li>
+
+
+        <div class="wrapper">
+            <button id="morePosts" type="reset" class="btn btn-primary  waves-effect">Show more posts</button>
+        </div>
     </div>
-</div>
 </form>

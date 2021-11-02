@@ -30,6 +30,34 @@ export class AuthService {
   }
 
 
+  //update user to add a new post for them
+  updateUserPost(userID, postTitle){
+    let headers = new Headers();
+    const data={
+      userID : userID,
+      postTitle : postTitle
+    }
+    console.log("in update user post", data);
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/users/update/user',data,{headers:headers}).map(res=>res.json());
+  }
+  
+  //modify a post
+  modifyPost(post){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/users/update/post',post,{headers:headers}).map(res=>res.json());
+  }
+
+
+  //remove post
+  deletePost(post){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/users/remove/post',post,{headers:headers}).map(res=>res.json());
+  }
+
+
   //authenticate the user
   authenticateUser(user){
     let headers = new Headers();
@@ -72,6 +100,14 @@ export class AuthService {
     console.log("load post id:"+this.post);
   }
 
+  searchPosts(title){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let url = 'http://localhost:8080/users/posts/all/'+title;
+    console.log("url is:"+url);
+    return this.http.get(url,{headers:headers}).map(res=>res.json());
+
+  }
 
   //getting a profile
   getProfile(){
@@ -99,7 +135,14 @@ export class AuthService {
       .map(res => res.json());
   
   }
-
+  getAllUserPosts(userID){
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let id= userID;
+    let url = 'http://localhost:8080/users/posts/'+id;
+    console.log("url is:"+url);
+    return this.http.get(url,{headers:headers}).map(res=>res.json());
+  }
   getPosts(){
     let headers = new Headers();
 

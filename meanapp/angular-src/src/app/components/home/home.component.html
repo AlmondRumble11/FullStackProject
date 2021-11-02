@@ -1,6 +1,7 @@
 <div class="jumbotron text-center">
     <h1>Full Stack course project</h1>
     <p class="lead">This is a course project for FullStack course</p>
+    <p class="lead">Below are all of the main pages of the application</p>
     <div>
         <a class="btn btn-primary" [routerLink]="['/register']">Register</a>
         <a class="btn btn-dark" [routerLink]="['/login']">Login</a>
@@ -8,5 +9,22 @@
 </div>
 
 <div class="row">
+    <div class="col-md-4">
+        <h3>Dashboard</h3>
+        <p>On this page all user posts that are public can be seen</p>
+        <p>Selecting a post open page where the full post can be seen</p>
+        <p>If user is the writer of the post, the post can be edited or deleted</p>
+    </div>
+    <div class="col-md-4">
+        <h3>Add post</h3>
+        <p>On this page new posts can be added</p>
+        <p>Posts can be private or public</p>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Profile</h3>
+        <p>See full user profile</p>
+        <p>All user post can be accessed from here</p>
+    </div>
 
 </div>

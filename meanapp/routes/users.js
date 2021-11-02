@@ -16,7 +16,39 @@ router.get("/dashboard", (req, res, next) => {
     res.json("sdfokj");
 });
 
+router.get("/posts/:id", (req, res, next) => {
+    let allPosts = [];
+    const id = req.params.id;
+    //find the user
+    User.findById({ _id: id }).then((user) => {
 
+        Post.find({ userID: user._id }).then((posts) => {
+
+            //console.log("sfdsdf" + posts);
+            if (posts) {
+                allPosts.push(posts);
+                console.log(allPosts);
+                res.send(allPosts);
+            }
+
+        }).catch((err) => console.log(err));
+
+
+
+    }).catch(err => console.log(err));
+});
+
+router.get("/posts/all/:title", (req, res, next) => {
+
+    console.log("############################################");
+    //https://stackoverflow.com/questions/10610131/checking-if-a-field-contains-a-string
+    Post.find({ title: { $regex: req.params.title } }, (err, data) => {
+        if (err) console.log(err);
+        console.log(data);
+        res.send(data);
+
+    })
+})
 
 //show all of the posts 
 router.get("/posts", (req, res, next) => {
@@ -27,8 +59,8 @@ router.get("/posts", (req, res, next) => {
 
         if (posts) {
             //console.log(posts);
-            for(let i = 0; i<posts.length; i++){
-                if(posts[i].private != true){
+            for (let i = 0; i < posts.length; i++) {
+                if (posts[i].private != true) {
                     publicPosts.push(posts[i]);
                 }
             }
@@ -70,12 +102,12 @@ router.post("/addpost", (req, res, next) => {
         if (err) {
             res.json({ success: false, msg: "failed to register user" });
             throw next(err);
-            return 
+            return
         };
         console.log("saved new post");
     });
-                //}
-            //}).catch(err => console.log(err));
+    //}
+    //}).catch(err => console.log(err));
 
     //}
     res.json({ success: true, msg: "Registered the user" });
@@ -107,6 +139,116 @@ router.post("/register", (req, res, next) => {
     });
     //res.send("THIS IS THE REGISTER PAGE");
 });
+
+//update user object to add posts to it
+router.post("/update/user", (req, res, next) => {
+    //get values from the req object
+    const userID = req.body.userID;
+    const postTitle = req.body.postTitle;
+
+
+    //get post id for the post ot be added to user's posts
+    Post.findOne({ userID: userID, title: postTitle }, (err, post) => {
+        if (err) throw err;
+
+
+        //if post was found(should find it always)
+        if (post) {
+            var postID = post._id;
+            //add post to users posts
+            console.log("Found the post");
+            console.log(post);
+
+            //update the user post array. Add id of the post to it
+            User.findOneAndUpdate({ _id: userID }, { $push: { posts: postID } }, (err, success) => {
+                if (err) throw err;
+
+                if (!success) {
+                    res.json({ success: false, msg: "failed to add post" });
+                } else {
+                    res.json({ success: true, msg: "Post was added for the correct user" });
+                }
+            });
+
+        } else {
+            console.log("No post found. Something went wrong...");
+        }
+
+    })
+
+
+
+    console.log(req.body);
+
+});
+
+//update a post
+router.post("/update/post", (req, res, next) => {
+    //  console.log(req.body);
+
+
+
+    Post.findByIdAndUpdate({ _id: req.body._id }, { $set: { content: req.body.content } }, { $set: { private: req.body.private } }, (err, success) => {
+        if (err) throw err;
+
+        if (!success) {
+            res.json({ success: false, msg: "failed to modify post" });
+        } else {
+            res.json({ success: true, msg: "Post was modified" });
+        }
+    });
+
+});
+
+
+//remove a post
+router.post("/remove/post", (req, res, next) => {
+    console.log(req.body);
+    let updatedUserPosts = [];
+    Post.findByIdAndRemove({ _id: req.body._id }, (err, success) => {
+        //discard error
+        if (err) throw err;
+
+
+        //was removed from posts 
+        if (success) {
+
+            //first get all user posts
+            User.findById({ _id: req.body.userID }, (err, user) => {
+                if (err) throw err;
+
+                //found the user
+                if (user) {
+                    for (let i = 0; i < user.posts.length; i++) {
+                        //if post not the removed one
+                        if (user.posts[i] != req.body._id) {
+                            updatedUserPosts.push(user.posts[i]);
+                        }
+                    }
+
+                    //remove post from the user also
+                    User.findByIdAndUpdate({ _id: req.body.userID }, { $set: { posts: updatedUserPosts } }, (err, success) => {
+                        if (err) throw err;
+
+                        if (success) {
+                            res.json({ success: true, msg: "removed post from the user" });
+
+                        } else {
+                            res.json({ success: false, msg: "failed to remove post" });
+                        }
+                    });
+
+                } else {
+                    res.json({ success: false, msg: "failed to remove post" });
+                }
+            });
+        } else {
+            res.json({ success: false, msg: "failed to remove post" });
+        }
+
+    });
+});
+
 
 
 //authenticate route
@@ -161,25 +303,25 @@ router.post("/authenticate", (req, res, next) => {
 //authenticate is for the protection
 router.get("/profile", passport.authenticate('jwt', { session: false }), (req, res, next) => {
     console.log("getting current user");
-    console.log("current user:"+req.user);
+    console.log("current user:" + req.user);
     res.json({ user: req.user });
 });
 
-router.get("/post/:id",(req,res,next)=>{
+router.get("/post/:id", (req, res, next) => {
     console.log("jksdnfjkdsfnjksd");
-    
+
     console.log(req.params.id);
-    Post.findById({_id: req.params.id},(err, post) => {
+    Post.findById({ _id: req.params.id }, (err, post) => {
         console.log(post);
         if (err) return next(err);
 
         if (post) {
-           
+
             return res.json(post);
         } else {
             return res.status(404).send("No post found!");
         }
-    }); 
+    });
 
 });
 

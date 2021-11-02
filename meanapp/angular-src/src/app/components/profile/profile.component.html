@@ -3,5 +3,8 @@
     <ul class="list-group">
         <li class="list-group-item">Username : {{user.username}}</li>
         <li class="list-group-item">Email : {{user.email}}</li>
+        <li class="list-group-item">All Own Posts Count: {{user.posts.length}}</li>
     </ul>
+
+    <button class="btn btn-primary" (click)="onShowAllPostsPressed()">Show all own posts</button>
 </div>
