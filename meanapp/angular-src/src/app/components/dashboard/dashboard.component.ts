@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   };*/
   postCount = 5;
   maxPostCount = 0;
-  searchText: Text;
+  searchText: String;
   constructor(private authService: AuthService, private router:Router,private flashMessage: FlashMessagesService) { }
   
   ngOnInit() {
@@ -34,17 +34,31 @@ export class DashboardComponent implements OnInit {
 
   }
   onSearchPressed(){
-    const input = document.getElementById("search");
-    console.log("1111111111111111111111111");
+   
     console.log(this.searchText);
+    if(this.searchText == undefined || this.searchText ==""){
+      this.authService.getPosts().subscribe(data=>{
+        console.log(data);
+        this.maxPostCount = data.length;
+        console.log(data.length);
+        this.postCount = 5;
+        this.posts = data.slice(0,this.postCount); 
 
-    //get all posts that contain search title
-    this.authService.searchPosts(this.searchText).subscribe(data=>{
-      console.log(data);
-      this.posts = data;
-      console.log(data.length)
-      this.postCount = data.length;
-    })
+        console.log(this.posts);
+      }, err =>{
+          console.log(err);
+          return false;
+        });
+    }else{
+      //get all posts that contain search title
+      this.authService.searchPosts(this.searchText).subscribe(data=>{
+        console.log(data);
+        this.posts = data;
+        console.log(data.length)
+        this.postCount = data.length;
+      });
+      this.searchText = "";
+  }
   }
 
   onMorePostPressed(){

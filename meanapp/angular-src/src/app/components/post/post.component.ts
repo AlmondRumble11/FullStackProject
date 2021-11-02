@@ -24,9 +24,10 @@ export class PostComponent implements OnInit {
     //get the post that was selected
     this.authService.getPost().subscribe(data=>{
       this.currentPost = data;
+      this.content = data.content;
      // console.log(data);
 
-
+   
      //get the current user  
      this.authService.getProfile().subscribe(user=>{
         console.log(user.user._id);
@@ -54,18 +55,21 @@ export class PostComponent implements OnInit {
 
     //get the new content and private/public
     const content = document.getElementById("content");
+    const content2 = document.getElementById("content2");
     const spanText = document.getElementById("spantext");
     const privateBox = document.getElementById("private"); 
-   
-    console.log(this.content2);
-    console.log(this.private);
     
+  
+    console.log(this.content);
+    console.log(this.private);
+
+    console.log("current content:\n"+this.currentPost.content);
     if(this.private == undefined) this.private = false;
 
     this.currentPost.private = this.private;
-    this.currentPost.content = this.content2;
+    this.currentPost.content = this.content;
 
-    this.authService.modifyPost(this.currentPost).subscribe(data=>{
+  this.authService.modifyPost(this.currentPost).subscribe(data=>{
       if(data.success){
 
         this.flashMessage.show("Post was modified", {cssClass: 'alert-success', timeout: 5500});
@@ -97,14 +101,33 @@ export class PostComponent implements OnInit {
       const content = document.getElementById("content");
       const content2 = document.getElementById("content2");
       const orgDiv = document.getElementById("org-content-div");
+      const newDiv = document.getElementById("newDiv");
+
+      //create a new textarea
+      /*const newTextarea = document.createElement("textarea");
+      newTextarea['[(ngModel)]']='content';
+      newTextarea.style.resize = 'none';
+      newTextarea.setAttribute('name','content2');
+      newTextarea.setAttribute("class",'form-control');
+      newTextarea.setAttribute('id','content2');
+      newTextarea.setAttribute('cols','50');
+      newTextarea.setAttribute('rows','10');
+      const text = this.currentPost.content;
+      console.log("sads"+text);
+      newTextarea['value']=text;
+
+      orgDiv.appendChild(newTextarea);*/
+
+
 
 
       content['disabled'] = false;
       this.count+=1;
       //set the orginal value for the new text area that can be updated
-      content2['value'] = this.currentPost.content;
+     // content2['value'] = this.currentPost.content;
+      this.currentPost.content = "";
       //remove original textarea
-      orgDiv.remove();
+     //content.remove();
       removebtn.style.visibility = "visible";
       privateBox.style.visibility = "visible";
       saveBtn.style.visibility = "visible";
