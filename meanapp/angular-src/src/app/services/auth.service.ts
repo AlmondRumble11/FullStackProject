@@ -14,11 +14,12 @@ export class AuthService {
 
   constructor(private http:Http) { }
 
+
+  //add post
   addPost(postcontent){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     console.log("adding post to db");
-    
     return this.http.post('http://localhost:8080/users/addpost',postcontent,{headers:headers}).map(res=>res.json());
   }
 
@@ -73,11 +74,11 @@ export class AuthService {
     this.authToken= token;
     this.user = user;
   }
+  //store current post
   storeCurrentPost(post){
     localStorage.setItem('post', post._id);
     this.post = post;
     console.log(post);
-    
 
   }
 
@@ -94,6 +95,8 @@ export class AuthService {
     const token  = localStorage.getItem('id_token');
     this.authToken = token;
   }
+
+  //load post id
   loadPost(){
     const post = localStorage.getItem('post');
     this.post = post;
@@ -121,6 +124,8 @@ export class AuthService {
       .map(res => res.json());
   }
 
+
+  //get a specific post
   getPost(){
     let headers = new Headers();
     this.loadToken();
@@ -135,6 +140,8 @@ export class AuthService {
       .map(res => res.json());
   
   }
+
+  //get all user posts
   getAllUserPosts(userID){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -143,6 +150,8 @@ export class AuthService {
     console.log("url is:"+url);
     return this.http.get(url,{headers:headers}).map(res=>res.json());
   }
+
+  //get all posts
   getPosts(){
     let headers = new Headers();
 

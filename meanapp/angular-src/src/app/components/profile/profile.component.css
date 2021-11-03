@@ -1,0 +1,22 @@
+h2 {
+    color: rgb(209, 207, 207);
+}
+
+li {
+    background-color: rgb(78, 74, 74);
+    margin: 0.1cm;
+    border-radius: 10px;
+    padding-left: 0.5cm;
+    padding-top: 0.2cm;
+    padding-bottom: 0.2cm;
+    font-size: 20px;
+}
+
+.profile-div {
+    background-color: rgb(53, 50, 50);
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-bottom: 0.1cm;
+    padding-top: 0.1cm;
+    border-radius: 15px;
+}

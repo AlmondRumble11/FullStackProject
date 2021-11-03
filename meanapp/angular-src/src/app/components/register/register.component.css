@@ -1,0 +1,24 @@
+h2 {
+    color: rgb(209, 207, 207);
+}
+
+label {
+    color: rgb(139, 130, 130);
+    padding-left: 0.1cm;
+    padding-top: 0.2cm;
+}
+
+.form-control {
+    padding-top: 0.2cm;
+    padding-bottom: 0.2cm;
+    font-size: 15px;
+}
+
+.form-register {
+    background-color: rgb(53, 50, 50);
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-bottom: 0.4cm;
+    padding-top: 0.4cm;
+    border-radius: 15px;
+}

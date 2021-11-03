@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService, private router:Router) { }
 
   ngOnInit() {
+
+    //get the current user sata
     this.authService.getProfile().subscribe(data =>{
       this.user = data.user;
     }, err =>{
@@ -24,6 +26,8 @@ export class ProfileComponent implements OnInit {
 
   }
 
+
+  //go to all user posts page
   onShowAllPostsPressed(){
 
     return this.router.navigate(['/userposts'], this.user);

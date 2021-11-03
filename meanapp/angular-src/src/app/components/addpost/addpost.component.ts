@@ -34,34 +34,43 @@ export class AddpostComponent implements OnInit {
       console.log(this.username);
         //create a new post
 
-    console.log("adding a new post");
+    //console.log("adding a new post");
+
+    //checking if private is checked
     if(this.private == undefined) this.private = false;
-    console.log(this.private);
+    //console.log(this.private);
+    
+    //check if posts has a title
     if(!this.title){
       this.flashMessage.show("Add title to your post",{cssClass: 'alert-danger',timeout:3000});
       this.router.navigate(['/addpost']);
       return false;
     }
+
+    //check if post has a content
     if(!this.content){
       this.flashMessage.show("Add content to your post",{cssClass: 'alert-danger',timeout:3000});
       this.router.navigate(['/addpost']);
       return false;
     }
     else{
-    const post={
-      userID:this.userID,
-      username: this.username,
-      title: this.title,
-      content: this.content,
-      //images: this.images,
-      private: this.private
+
+      //createa a post object
+      const post={
+        userID:this.userID,
+        username: this.username,
+        title: this.title,
+        content: this.content,
+        private: this.private
     }
-    console.log("creating a new post");
-    console.log("adding post to mongo:"+post.private);
+
+    //console.log("creating a new post");
+    //console.log("adding post to mongo:"+post.private);
     
     //add post to database
     this.authService.addPost(post).subscribe(data=>{
-      //console.log(data);
+      
+      //adding post to posts collection was successful
       if(data.success){
 
         //add post to user's posts
@@ -74,23 +83,18 @@ export class AddpostComponent implements OnInit {
             this.router.navigate(['/addpost']);
           }
         });
+
+      //something went wrong
       }else{
         this.flashMessage.show("Something went wrong. Please try again",{cssClass: 'alert-danger',timeout:3000});
         this.router.navigate(['/addpost']);
       }
       return true;
     });
-
-  
-
   }
     },err =>{
       console.log(err);
       return false;
     });
-  
-
-
   }
-
 }

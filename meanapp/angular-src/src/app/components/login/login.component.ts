@@ -19,12 +19,13 @@ export class LoginComponent implements OnInit {
   //login submit
   onLoginSubmit(){
     
+    //create an user object
     const user = {
       username: this.username,
       password: this.password
     }
 
-   
+   //check that user has an account
     this.authService.authenticateUser(user).subscribe(data=>{
       //if correct username and password
       if(data.success){
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
         this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeout: 5500});
         this.router.navigate(['login']);
       }
-      //console.log(data);
+      
     });
   }
 }

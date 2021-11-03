@@ -10,55 +10,61 @@ const Post = require("../models/Post");
 
 const config = require("../config/database");
 
-//get all posts
-router.get("/dashboard", (req, res, next) => {
-    console.log("getting current users posts");
-    res.json("sdfokj");
-});
 
+//get post by its id
 router.get("/posts/:id", (req, res, next) => {
     let allPosts = [];
     const id = req.params.id;
     //find the user
     User.findById({ _id: id }).then((user) => {
 
+        //find the post 
         Post.find({ userID: user._id }).then((posts) => {
 
-            //console.log("sfdsdf" + posts);
+            //send post to client
             if (posts) {
                 allPosts.push(posts);
-                console.log(allPosts);
+                //console.log(allPosts);
                 res.send(allPosts);
             }
-
         }).catch((err) => console.log(err));
-
-
-
     }).catch(err => console.log(err));
 });
 
+
+//get all posts with the search term
 router.get("/posts/all/:title", (req, res, next) => {
+    let posts = [];
 
-    console.log("############################################");
     //https://stackoverflow.com/questions/10610131/checking-if-a-field-contains-a-string
-    Post.find({ title: { $regex: req.params.title } }, (err, data) => {
+    Post.find({ title: { $regex: req.params.title }, }, (err, data) => {
+        //remove private posts
+        //console.log(data.length);
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i].private);
+            if (data[i].private == false) {
+                posts.push(data[i]);
+            }
+        }
         if (err) console.log(err);
-        console.log(data);
-        res.send(data);
-
-    })
+        // console.log(data);
+        //console.log(posts);
+        res.send(posts);
+    });
 })
 
 //show all of the posts 
 router.get("/posts", (req, res, next) => {
     let publicPosts = [];
     console.log("getting all of the posts");
+
+    //get all posts
     Post.find({}, (err, posts) => {
         if (err) return next(err);
 
         if (posts) {
             //console.log(posts);
+            //check for private
             for (let i = 0; i < posts.length; i++) {
                 if (posts[i].private != true) {
                     publicPosts.push(posts[i]);
@@ -77,26 +83,13 @@ router.get("/posts", (req, res, next) => {
 
 //add new post
 router.post("/addpost", (req, res, next) => {
-
-
-    let imgIDs = [];
-    /*for (var i = 0; i <= req.body.images.length; i++) {
-        Images.find({ name: req.body.images[i] })
-            .then(image => {
-
-                imgIDs.push(image[0]._id);
-                // console.log("id is: " + imageIds);
-                //imageIds.push(image[0]._id);
-            }).catch(err => console.log(err))
-            .then(() => {
-                if (imgIDs.length == req.body.images.length) {*/
-    console.log(req.body);
+    //console.log(req.body);
+    //add new post to db
     let newPost = new Post({
         userID: req.body.userID,
         username: req.body.username,
         title: req.body.title,
         content: req.body.content,
-        //images: imgIDs,
         private: req.body.private
     }).save((err) => {
         if (err) {
@@ -106,20 +99,15 @@ router.post("/addpost", (req, res, next) => {
         };
         console.log("saved new post");
     });
-    //}
-    //}).catch(err => console.log(err));
 
-    //}
     res.json({ success: true, msg: "Registered the user" });
-
-
 });
 
 
 //register route
 router.post("/register", (req, res, next) => {
 
-    console.log("kjhgfs");
+
     //create a new user object
     let newUser = new User({
         name: req.body.name,
@@ -137,7 +125,7 @@ router.post("/register", (req, res, next) => {
             res.json({ success: true, msg: "Registered the user" });
         }
     });
-    //res.send("THIS IS THE REGISTER PAGE");
+
 });
 
 //update user object to add posts to it
@@ -149,62 +137,64 @@ router.post("/update/user", (req, res, next) => {
 
     //get post id for the post ot be added to user's posts
     Post.findOne({ userID: userID, title: postTitle }, (err, post) => {
-        if (err) throw err;
+            if (err) throw err;
 
+            //if post was found(should find it always)
+            if (post) {
+                var postID = post._id;
+                //add post to users posts
+                console.log("Found the post");
+                console.log(post);
 
-        //if post was found(should find it always)
-        if (post) {
-            var postID = post._id;
-            //add post to users posts
-            console.log("Found the post");
-            console.log(post);
+                //update the user post array. Add id of the post to it
+                User.findOneAndUpdate({ _id: userID }, { $push: { posts: postID } }, (err, success) => {
+                    if (err) throw err;
+                    if (!success) {
+                        res.json({ success: false, msg: "failed to add post" });
+                    } else {
+                        res.json({ success: true, msg: "Post was added for the correct user" });
+                    }
+                });
 
-            //update the user post array. Add id of the post to it
-            User.findOneAndUpdate({ _id: userID }, { $push: { posts: postID } }, (err, success) => {
-                if (err) throw err;
-
-                if (!success) {
-                    res.json({ success: false, msg: "failed to add post" });
-                } else {
-                    res.json({ success: true, msg: "Post was added for the correct user" });
-                }
-            });
-
-        } else {
-            console.log("No post found. Something went wrong...");
-        }
-
-    })
-
-
-
-    console.log(req.body);
-
+            } else {
+                console.log("No post found. Something went wrong...");
+            }
+        })
+        //console.log(req.body);
 });
 
 //update a post
 router.post("/update/post", (req, res, next) => {
-    //  console.log(req.body);
 
+    //set new content
+    Post.findByIdAndUpdate({ _id: req.body._id }, { $set: { content: req.body.content } }, (err, success) => {
+        if (err) throw err;
 
+        if (!success) {
+            res.json({ success: false, msg: "failed to modify post" });
+        }
+    });
 
-    Post.findByIdAndUpdate({ _id: req.body._id }, { $set: { content: req.body.content } }, { $set: { private: req.body.private } }, (err, success) => {
+    //set new private
+    Post.findByIdAndUpdate({ _id: req.body._id }, { $set: { private: req.body.private } }, (err, success) => {
         if (err) throw err;
 
         if (!success) {
             res.json({ success: false, msg: "failed to modify post" });
         } else {
+
             res.json({ success: true, msg: "Post was modified" });
         }
     });
-
 });
 
 
 //remove a post
 router.post("/remove/post", (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     let updatedUserPosts = [];
+
+    //find the post and remove it from the post collection
     Post.findByIdAndRemove({ _id: req.body._id }, (err, success) => {
         //discard error
         if (err) throw err;
@@ -226,7 +216,7 @@ router.post("/remove/post", (req, res, next) => {
                         }
                     }
 
-                    //remove post from the user also
+                    //remove post from the user also-
                     User.findByIdAndUpdate({ _id: req.body.userID }, { $set: { posts: updatedUserPosts } }, (err, success) => {
                         if (err) throw err;
 
@@ -257,7 +247,7 @@ router.post("/authenticate", (req, res, next) => {
     const password = req.body.password;
 
     //getting user using user name from the db
-    console.log("serching for the user");
+    //console.log("serching for the user");
     User.getUserByUsername(username, (err, user) => {
         if (err) throw console.log("error: " + err);
         //if no user
@@ -296,23 +286,24 @@ router.post("/authenticate", (req, res, next) => {
             }
         });
     });
-    //res.send("THIS IS THE AUTHENTICATE PAGE");
+
 });
 
 //profile route
 //authenticate is for the protection
 router.get("/profile", passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    console.log("getting current user");
-    console.log("current user:" + req.user);
+    //    console.log("getting current user");
+    //  console.log("current user:" + req.user);
     res.json({ user: req.user });
 });
 
+//get a post by its id
 router.get("/post/:id", (req, res, next) => {
-    console.log("jksdnfjkdsfnjksd");
 
-    console.log(req.params.id);
+    //console.log(req.params.id);
+    //find the post by id
     Post.findById({ _id: req.params.id }, (err, post) => {
-        console.log(post);
+        //console.log(post);
         if (err) return next(err);
 
         if (post) {
@@ -324,7 +315,6 @@ router.get("/post/:id", (req, res, next) => {
     });
 
 });
-
 
 
 //export

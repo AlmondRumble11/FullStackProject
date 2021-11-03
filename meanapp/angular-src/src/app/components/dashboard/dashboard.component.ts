@@ -11,20 +11,27 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 
 export class DashboardComponent implements OnInit {
-  posts=[]/*: Post={
-  };*/
+  posts=[]
+  allPosts=[];
   postCount = 5;
   maxPostCount = 0;
   searchText: String;
   constructor(private authService: AuthService, private router:Router,private flashMessage: FlashMessagesService) { }
   
   ngOnInit() {
+
+    //get all of the posts from db
     this.authService.getPosts().subscribe(data=>{
-      console.log(data);
+      //console.log(data);
+      
+      //max count is the number of public posts in db
       this.maxPostCount = data.length;
-      console.log(data.length);
+      //console.log(data.length);
+      this.allPosts = data;
+      //get only the 5 first posts
       this.posts = data.slice(0,this.postCount); 
-      console.log(this.posts);
+      
+      //console.log(this.posts);
     }, err =>{
         console.log(err);
         return false;
@@ -33,15 +40,27 @@ export class DashboardComponent implements OnInit {
       
 
   }
+
+  //when search btn is pressed
   onSearchPressed(){
    
-    console.log(this.searchText);
+    //console.log(this.searchText);
+
+    //if does not have text
     if(this.searchText == undefined || this.searchText ==""){
+
+      //get all posts
       this.authService.getPosts().subscribe(data=>{
-        console.log(data);
-        this.maxPostCount = data.length;
-        console.log(data.length);
+       // console.log(data);
+      
+          //max count is the number of public posts in db
+       this.maxPostCount = data.length;
+        //console.log(data.length);
+
+        //now has 5 posts
         this.postCount = 5;
+
+        //get only the 5 first posts
         this.posts = data.slice(0,this.postCount); 
 
         console.log(this.posts);
@@ -49,46 +68,56 @@ export class DashboardComponent implements OnInit {
           console.log(err);
           return false;
         });
+
+    //had search term
     }else{
       //get all posts that contain search title
       this.authService.searchPosts(this.searchText).subscribe(data=>{
-        console.log(data);
+        
+        //console.log(data);
+        //get posts that allign with the search term
         this.posts = data;
-        console.log(data.length)
+        //console.log(data.length)
         this.postCount = data.length;
       });
+
+      //reset search
       this.searchText = "";
   }
   }
 
+  //more posts btn was pressed
   onMorePostPressed(){
-    
-    
+
+    //check that can have more posts
     if(this.maxPostCount > this.postCount){
-      this.postCount += 5;
-    console.log("showing more posts");
-    this.authService.getPosts().subscribe(data=>{
-      console.log(data);
-      this.posts = data.slice(0,this.postCount); 
-      console.log(this.posts);
-    }, err =>{
-        console.log(err);
-        return false;
-      });
+    
+      //update post count
+    this.postCount += 5;
+
+      //add more posts to page
+      this.posts = this.allPosts.slice(0,this.postCount);
     }else{
+
+      //does not have more posts
       const btn = document.getElementById("morePosts");
       btn.setAttribute('disabled', 'true');
       this.flashMessage.show("No more posts to be shown", {cssClass: 'alert-success', timeout: 5500});
     }
   }
+
+  //post is pressed
   onSelect(post){
 
+    //store the current post to local storage
     this.authService.storeCurrentPost(post);
     //this.authService.getPost(post)
     console.log("post id = "+post._id);
     let url = 'post/'+post._id;
+
+    //navigate to post page
     return this.router.navigate(['/post']);
-    console.log("ksfd");
+    
   }
   
 

@@ -1,16 +1,16 @@
 li {
     cursor: pointer;
-    left: 0;
-    background-color: rgb(243, 170, 141);
+    background-color: rgb(78, 74, 74);
     margin: .5em;
-    padding: .3em 0;
-    height: 3.5em;
-    border-radius: 4px;
+    border-radius: 10px;
+    padding-left: 0.5cm;
+    padding-top: 0.2cm;
+    padding-bottom: 0.2cm;
 }
 
 li:hover {
-    color: #22221e;
-    background-color: #dbcdcd;
+    color: rgb(29, 29, 32);
+    background-color: #707070;
     left: .1em;
 }
 
@@ -18,7 +18,29 @@ li:hover {
     text-align: center;
 }
 
-.button {
-    position: absolute;
-    top: 50%;
+h2 {
+    color: rgb(209, 207, 207);
+}
+
+.label {
+    color: rgb(209, 207, 207);
+    padding-left: 0.2cm;
+    padding-top: 0.2cm;
+    font-size: 25px;
+}
+
+.label2 {
+    color: rgb(139, 130, 130);
+    padding-left: 0.2cm;
+    padding-top: 0.2cm;
+    font-size: 18px;
+}
+
+.posts {
+    background-color: rgb(53, 50, 50);
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-bottom: 0.5cm;
+    padding-top: 0.3cm;
+    border-radius: 15px;
 }

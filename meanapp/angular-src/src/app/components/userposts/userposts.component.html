@@ -1,11 +1,12 @@
+<br>
 <div *ngIf="user">
-    <h2 class="page-header">All Posts of {{user.username}}</h2>
-
-
-    <div *ngIf="posts">
+    <h2 class="page-header">All Posts of the user '{{user.username}}'</h2>
+    <label class="label2">Press posts to see the contents and edit or delete the post</label>
+    <br>
+    <div *ngIf="posts" class="posts">
 
         <li *ngFor="let post of posts" (click)="onSelect(post)" style="list-style: none;">
-            <span>Title: {{post.title}}</span>
+            <label class="label">Title: {{post.title}}</label>
 
         </li>
     </div>

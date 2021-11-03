@@ -1,6 +1,7 @@
+<br>
 <div>
     <h2 class="page-header">Register a new user</h2>
-    <form (submit)="onRegisterSubmit()">
+    <form (submit)="onRegisterSubmit()" class="form-register">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" placeholder="Enter Name">
@@ -12,12 +13,13 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
-            <small id="emailHelp" class="form-text text-muted">Your email is secured with us</small>
+
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password" placeholder=" Enter Password">
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <br>
+        <input type="submit" class="btn btn-success" value="Submit">
     </form>
 </div>

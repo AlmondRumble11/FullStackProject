@@ -1,9 +1,24 @@
-button {
-    color:forestgreen,
-
+h2 {
+    color: rgb(209, 207, 207);
+    font-size: 50px;
 }
+
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    color:black;
+    color: black;
+}
+
+label {
+    color: rgb(139, 130, 130);
+    font-size: 20px;
+}
+
+.form {
+    background-color: rgb(53, 50, 50);
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-bottom: 0.5cm;
+    padding-top: 0.3cm;
+    border-radius: 15px;
 }
