@@ -56,6 +56,6 @@ they can give a post a title, content and make it private/public.
 Logout
 pressing this logs out the user
 
-here is video that shows how to run the web page: https://drive.google.com/file/d/1oz5LsSv2JnIOQ9QM0ee3NcbX-umOqMe-/view?usp=sharing
+here is video that shows how to run the web page: https://drive.google.com/file/d/17tj0U0-yNdWkr7CJqQz2bUWtpZKUjqnP/view?usp=sharing
 NOTE: authentication guard is not shown in the video but it has been implemented to dashboard, profile, addpost and userpost pages.
 
