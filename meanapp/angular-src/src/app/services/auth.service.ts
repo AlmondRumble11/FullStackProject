@@ -20,14 +20,14 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     console.log("adding post to db");
-    return this.http.post('http://localhost:8080/users/addpost',postcontent,{headers:headers}).map(res=>res.json());
+    return this.http.post('users/addpost',postcontent,{headers:headers}).map(res=>res.json());
   }
 
   //register the user
   registerUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8080/users/register/',user,{headers:headers}).map(res=>res.json());
+    return this.http.post('users/register/',user,{headers:headers}).map(res=>res.json());
   }
 
 
@@ -40,14 +40,14 @@ export class AuthService {
     }
     console.log("in update user post", data);
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8080/users/update/user',data,{headers:headers}).map(res=>res.json());
+    return this.http.post('users/update/user',data,{headers:headers}).map(res=>res.json());
   }
   
   //modify a post
   modifyPost(post){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8080/users/update/post',post,{headers:headers}).map(res=>res.json());
+    return this.http.post('users/update/post',post,{headers:headers}).map(res=>res.json());
   }
 
 
@@ -55,7 +55,7 @@ export class AuthService {
   deletePost(post){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8080/users/remove/post',post,{headers:headers}).map(res=>res.json());
+    return this.http.post('users/remove/post',post,{headers:headers}).map(res=>res.json());
   }
 
 
@@ -63,7 +63,7 @@ export class AuthService {
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/users/authenticate', user, {headers: headers})
+    return this.http.post('users/authenticate', user, {headers: headers})
       .map(res => res.json());
   }
 
@@ -106,8 +106,8 @@ export class AuthService {
   searchPosts(title){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let url = 'http://localhost:8080/users/posts/all/'+title;
-    console.log("url is:"+url);
+    let url = 'users/posts/all/'+title;
+    //console.log("url is:"+url);
     return this.http.get(url,{headers:headers}).map(res=>res.json());
 
   }
@@ -120,7 +120,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:8080/users/profile', {headers: headers})
+    return this.http.get('users/profile', {headers: headers})
       .map(res => res.json());
   }
 
@@ -134,7 +134,7 @@ export class AuthService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json'); 
     let id = this.post
-    let url = 'http://localhost:8080/users/post/'+id;
+    let url = 'users/post/'+id;
     //console.log(url);
     return this.http.get(url, {headers: headers})
       .map(res => res.json());
@@ -146,7 +146,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let id= userID;
-    let url = 'http://localhost:8080/users/posts/'+id;
+    let url = '/users/posts/'+id;
     console.log("url is:"+url);
     return this.http.get(url,{headers:headers}).map(res=>res.json());
   }
@@ -159,7 +159,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:8080/users/posts', {headers: headers})
+    return this.http.get('users/posts', {headers: headers})
       .map(res => res.json());
   }
 
