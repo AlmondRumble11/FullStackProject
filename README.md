@@ -66,11 +66,11 @@ MeanApp tutorial Heroku app: https://shielded-thicket-55713.herokuapp.com/
 Course Project Heroku App: https://immense-hamlet-98311.herokuapp.com/ 
 Link to project video: https://drive.google.com/file/d/17tj0U0-yNdWkr7CJqQz2bUWtpZKUjqnP/view?usp=sharing
 
-Express task repository: JesseMustonen / express — Bitbucket
-Node.js task repository: JesseMustonen / fullstack — Bitbucket
-Angular task repository: JesseMustonen / heroes — Bitbucket
-Mean app repository: JesseMustonen / meanapp — Bitbucket
-Mongo picture repository: JesseMustonen / mongodb-pictures — Bitbucket
-![image](https://user-images.githubusercontent.com/54431988/140372945-cd1e9b8a-823c-43f9-ba48-67964ae19b7f.png)
+Express task repository: https://github.com/AlmondRumble11/Express
+Node.js task repository: https://github.com/AlmondRumble11/FullStack
+Angular task repository: https://github.com/AlmondRumble11/heroes
+Mean app repository:https://github.com/AlmondRumble11/MeanApp
+Mongo picture repository: https://github.com/AlmondRumble11/FullStackCourse
+
 
 
