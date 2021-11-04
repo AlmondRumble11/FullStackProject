@@ -1,4 +1,7 @@
 # FullStackProject
+
+LINK TO FULL STACK COURSE DIARY: https://drive.google.com/file/d/18pT7wnpFAVaKZdjbV_cVbLGeCyZN0Hj3/view?usp=sharing
+
 Course project for FullStack course
 To run the project go to this url:
 https://immense-hamlet-98311.herokuapp.com/
