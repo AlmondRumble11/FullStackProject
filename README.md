@@ -62,14 +62,21 @@ NOTE: authentication guard is not shown in the video but it has been implemented
 
 Other course work
 Node.js Heroku app: https://murmuring-island-07810.herokuapp.com/
+
 MeanApp tutorial Heroku app: https://shielded-thicket-55713.herokuapp.com/ 
+
 Course Project Heroku App: https://immense-hamlet-98311.herokuapp.com/ 
+
 Link to project video: https://drive.google.com/file/d/17tj0U0-yNdWkr7CJqQz2bUWtpZKUjqnP/view?usp=sharing
 
 Express task repository: https://github.com/AlmondRumble11/Express
+
 Node.js task repository: https://github.com/AlmondRumble11/FullStack
+
 Angular task repository: https://github.com/AlmondRumble11/heroes
+
 Mean app repository:https://github.com/AlmondRumble11/MeanApp
+
 Mongo picture repository: https://github.com/AlmondRumble11/FullStackCourse
 
 
