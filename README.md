@@ -1,6 +1,31 @@
 # FullStackProject
 
+I could not get add other tasks to this repository cause i said there were too many files so underneath is the links to their repositories from github and 
+in the learning diary there are links to bitbucket repository where all of the task are in a bitbucket project
+
+
 LINK TO FULL STACK COURSE DIARY: https://drive.google.com/file/d/18pT7wnpFAVaKZdjbV_cVbLGeCyZN0Hj3/view?usp=sharing
+
+
+
+Other course work
+Node.js Heroku app: https://murmuring-island-07810.herokuapp.com/
+
+MeanApp tutorial Heroku app: https://shielded-thicket-55713.herokuapp.com/ 
+
+Course Project Heroku App: https://immense-hamlet-98311.herokuapp.com/ 
+
+Link to project video: https://drive.google.com/file/d/17tj0U0-yNdWkr7CJqQz2bUWtpZKUjqnP/view?usp=sharing
+
+Express task repository: https://github.com/AlmondRumble11/Express
+
+Node.js task repository: https://github.com/AlmondRumble11/FullStack
+
+Angular task repository: https://github.com/AlmondRumble11/heroes
+
+Mean app repository:https://github.com/AlmondRumble11/MeanApp
+
+Mongo picture repository: https://github.com/AlmondRumble11/FullStackCourse
 
 Course project for FullStack course
 To run the project go to this url:
@@ -63,24 +88,7 @@ here is video that shows how to run the web page: https://drive.google.com/file/
 NOTE: authentication guard is not shown in the video but it has been implemented to dashboard, profile, addpost and userpost pages.
 
 
-Other course work
-Node.js Heroku app: https://murmuring-island-07810.herokuapp.com/
 
-MeanApp tutorial Heroku app: https://shielded-thicket-55713.herokuapp.com/ 
-
-Course Project Heroku App: https://immense-hamlet-98311.herokuapp.com/ 
-
-Link to project video: https://drive.google.com/file/d/17tj0U0-yNdWkr7CJqQz2bUWtpZKUjqnP/view?usp=sharing
-
-Express task repository: https://github.com/AlmondRumble11/Express
-
-Node.js task repository: https://github.com/AlmondRumble11/FullStack
-
-Angular task repository: https://github.com/AlmondRumble11/heroes
-
-Mean app repository:https://github.com/AlmondRumble11/MeanApp
-
-Mongo picture repository: https://github.com/AlmondRumble11/FullStackCourse
 
 
 
