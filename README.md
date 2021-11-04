@@ -1,6 +1,6 @@
 # FullStackProject
 
-I could not get add other tasks to this repository cause i said there were too many files so underneath is the links to their repositories from github and 
+I could not  add other tasks to this repository cause i said there were too many files so underneath is the links to their repositories from github and 
 in the learning diary there are links to bitbucket repository where all of the task are in a bitbucket project
 
 
