@@ -29,8 +29,8 @@ Mongo picture repository: https://github.com/AlmondRumble11/FullStackCourse
 
 Course project for FullStack course
 To run the project go to this url:
-https://immense-hamlet-98311.herokuapp.com/
-
+https://afternoon-hamlet-02505.herokuapp.com/
+(ONLY USE THIS LINK TO TEST THE HEROKU APP. ALL OTHERS HAVE OLD DATABASE)
 it should load the web application.
 
 Home
