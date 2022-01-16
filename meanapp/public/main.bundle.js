@@ -182,7 +182,7 @@ var AuthService = /** @class */ (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
         var id = userID;
-        var url = '/users/posts/' + id;
+        var url = 'users/posts/' + id;
         console.log("url is:" + url);
         return this.http.get(url, { headers: headers }).map(function (res) { return res.json(); });
     };
@@ -532,6 +532,7 @@ var DashboardComponent = /** @class */ (function () {
             _this.allPosts = data;
             //get only the 5 first posts
             _this.posts = data.slice(0, _this.postCount);
+            _this.postCount = _this.posts.length;
             //console.log(this.posts);
         }, function (err) {
             console.log(err);
@@ -580,6 +581,9 @@ var DashboardComponent = /** @class */ (function () {
         if (this.maxPostCount > this.postCount) {
             //update post count
             this.postCount += 5;
+            if (this.postCount > this.maxPostCount) {
+                this.postCount = this.maxPostCount;
+            }
             //add more posts to page
             this.posts = this.allPosts.slice(0, this.postCount);
         }

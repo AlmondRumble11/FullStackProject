@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
       this.allPosts = data;
       //get only the 5 first posts
       this.posts = data.slice(0,this.postCount); 
+      this.postCount = this.posts.length;
       
       //console.log(this.posts);
     }, err =>{
@@ -93,8 +94,11 @@ export class DashboardComponent implements OnInit {
     if(this.maxPostCount > this.postCount){
     
       //update post count
+      
     this.postCount += 5;
-
+    if(this.postCount > this.maxPostCount){
+      this.postCount = this.maxPostCount;
+    }
       //add more posts to page
       this.posts = this.allPosts.slice(0,this.postCount);
     }else{

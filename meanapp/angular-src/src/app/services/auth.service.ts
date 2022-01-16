@@ -146,7 +146,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     let id= userID;
-    let url = '/users/posts/'+id;
+    let url = 'users/posts/'+id;
     console.log("url is:"+url);
     return this.http.get(url,{headers:headers}).map(res=>res.json());
   }
