@@ -8,7 +8,7 @@ LINK TO FULL STACK COURSE DIARY: https://drive.google.com/file/d/18pT7wnpFAVaKZd
 
 
 
-Other course work
+Other course work (EDIT: heroku applications do not work after it became premium service)
 Node.js Heroku app: https://murmuring-island-07810.herokuapp.com/
 
 MeanApp tutorial Heroku app: https://shielded-thicket-55713.herokuapp.com/ 
